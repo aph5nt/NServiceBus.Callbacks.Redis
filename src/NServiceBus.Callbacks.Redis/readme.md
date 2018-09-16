@@ -1,18 +1,14 @@
 ﻿
 ## Setup
-Setup mostly only requires that you register an instance of the Redis ISubscriber. Choose your own injection pattern, but at some point before the application is "ready", the following needs to be called:
+Setup mostly only requires that you register a factory that returns an instance of the Redis ISubscriber. Choose your own injection pattern, but at some point before the application is "ready", the following needs to be called:
 ``` csharp
-CallbackSubscriber.SetSubscriber(...)
+CallbackSubscriber.UseSubscriberFactory()
 ```
-
-Where ... is an instance of `ISubscriber`. 
-
 For example:
 
 ``` csharp
 var multiplexer = ConnectionMultiplexer.Connect("localhost:6379");
-var subscriber = multiplexer.GetSubscriber();
-CallbackSubscriber.SetSubscriber(subscriber);
+CallbackSubscriber.UseSubscriberFactory(multiplexer.GetSubscriber);
 ```
 
 ## Usage
@@ -61,3 +57,4 @@ var result = await MyReplyHandler.GetResponseAsync(conversationId);
 // result.Value is "Hello World!"
 ```
 
+See samples for working demo

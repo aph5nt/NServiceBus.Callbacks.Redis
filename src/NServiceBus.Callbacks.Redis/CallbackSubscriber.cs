@@ -1,16 +1,19 @@
-﻿using StackExchange.Redis;
+﻿using System;
+using StackExchange.Redis;
 
 namespace NServiceBus.Callbacks.Redis
 {
     public abstract class CallbackSubscriber
     {
-        // Locator anti-pattern but I'm not sorry. This is used to reduce 
-        // the ceremony around instantiation of a new handler. It's not
-        // our implementation anyway, so it doesn't need unit testing.
+        private static Func<ISubscriber> _subscriberFactory;
 
-        protected static ISubscriber Subscriber; 
-
-        public static void UseSubscriber(ISubscriber subscriber) => Subscriber = subscriber;
+        protected static ISubscriber Subscriber => _subscriberFactory(); 
+        
+        /// <summary>
+        /// Sets the subscriber factory.
+        /// </summary>
+        /// <param name="subscriberFactory"></param>
+        public static void UseSubscriberFactory(Func<ISubscriber> subscriberFactory) => _subscriberFactory = subscriberFactory;
 
         /// <summary>
         /// Ensures that subscriber is set.

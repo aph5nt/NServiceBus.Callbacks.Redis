@@ -51,21 +51,24 @@ namespace UsageSample.Sender
             config.UseContainer<ServicesBuilder>(c => c.ExistingServices(services));
             config.UseSerialization<NewtonsoftSerializer>();
 
-            var provider = services.BuildServiceProvider();
-            CallbackSubscriber.UseSubscriber(provider.GetRequiredService<ISubscriber>());
-
+            CallbackSubscriber.UseSubscriberFactory(() => services.BuildServiceProvider().GetRequiredService<ISubscriber>());
+            
             return Endpoint.Start(config).Result;
         }
 
         static void Main(string[] args)
         {
+            // simulate two competing consumers
+
             var s1 = new ServiceCollection();
             AddRedis(s1);
             var session1 = ConfigureSession(s1);
-
+            var provider1 = s1.BuildServiceProvider();
+            
             var s2 = new ServiceCollection();
             AddRedis(s2);
             var session2 = ConfigureSession(s2);
+            var provider2 = s2.BuildServiceProvider();
 
             var consumer1 = new Program{ _instanceId = Xid.NewXid().ToString()};
             var consumer2 = new Program{_instanceId = Xid.NewXid().ToString()};

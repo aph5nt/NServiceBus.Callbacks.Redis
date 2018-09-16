@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{5964
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Sender", "UsageSample\UsageSample.Sender.csproj", "{FF95F012-BD8A-4F8B-8F6D-0F1A3BDA06C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Sender", "samples\UsageSample.Sender\UsageSample.Sender.csproj", "{FF95F012-BD8A-4F8B-8F6D-0F1A3BDA06C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Receiver", "UsageSample.Receiver\UsageSample.Receiver.csproj", "{857E6A46-7C5B-4D56-AF15-2919D7F457D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Receiver", "samples\UsageSample.Receiver\UsageSample.Receiver.csproj", "{857E6A46-7C5B-4D56-AF15-2919D7F457D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Messaging", "UsageSample.Messaging\UsageSample.Messaging.csproj", "{1AD09F94-AD08-40FB-A189-EC08A533C9B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Messaging", "samples\UsageSample.Messaging\UsageSample.Messaging.csproj", "{1AD09F94-AD08-40FB-A189-EC08A533C9B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

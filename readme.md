@@ -52,7 +52,7 @@ public class MyCommandHandler : IHandleMessages<MyCommand>
 
 ### Sender
 
-Send the request and then await the response. I added an extension overload to allow you to pass the destination and conversation ID in without having to add it to options.
+Send the request which will give you back a handle. Await it to get your response.
 
 ``` csharp
 var options = new SendOptions();

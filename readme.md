@@ -1,4 +1,6 @@
-﻿# NServiceBus.Callbacks.Redis
+[![Nuget](https://img.shields.io/badge/nuget-v0.1.1-green.svg)](https://www.nuget.org/packages/NServiceBus.Callbacks.Redis/0.1.1)
+
+# NServiceBus.Callbacks.Redis
 This is an unofficial package that provides an implementation of a callback pattern. This essentially mimicks the behavior of a request-response call, effectively blocking until a response is received from the downstream service. The problem I was trying to solve is that with the existing callbacks package provided by Particular, it requires that the endpoint be uniquely identifiable. This is to ensure that the message is delivered to the correct instance that made the request. This can be problematic in environments such as Kubernetes where instances are spinning up and down and any means of uniquely identifying the instance is unpredictable (e.g. machine name, pod id, etc.) -- the transport would eventually get loaded up with dead queues. 
 
 Rather than implementing a complex set of scripts that aim to make the queue names identifiable or delete them once they are consumed, or some other convoluted infrastructure maintenance nightmare, instead, NServiceBus.Callbacks.Redis simply creates a channel on Redis to receive the specific reply on the instance that made the request, and then kills it when it's done.

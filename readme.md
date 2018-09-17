@@ -33,7 +33,7 @@ Just make sure to reply with the correct response type
 ``` csharp
 public class MyCommandHandler : IHandleMessages<MyCommand>
 {
-    private readonly _subscriber;_
+    private readonly _subscriber;
 
     public MyCommandHandler(ISubscriber subscriber)
     {

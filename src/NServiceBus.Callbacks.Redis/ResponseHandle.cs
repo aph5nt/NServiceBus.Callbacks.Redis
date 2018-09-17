@@ -4,6 +4,10 @@ using StackExchange.Redis;
 
 namespace NServiceBus.Callbacks.Redis
 {
+    /// <summary>
+    /// Wraps a preconfigured instance of <see cref="ISubscriber"/> that will be used to received a reply from a downstream service.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ResponseHandle<T> where T : class, IMessage
     {
         private readonly ISubscriber _subscriber;

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NServiceBus.Callbacks.Redis\NServiceBus.Callbacks.Redis.csproj" />
     <ProjectReference Include="..\UsageSample.Messaging\UsageSample.Messaging.csproj" />
   </ItemGroup>
 </Project>

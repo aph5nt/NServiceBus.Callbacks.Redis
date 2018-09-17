@@ -5,7 +5,6 @@ using NServiceBus;
 using NServiceBus.Callbacks.Redis;
 using StackExchange.Redis;
 using UsageSample.Messaging;
-using UsageSample.Sender1;
 using XidNet;
 
 namespace UsageSample.Sender
@@ -16,26 +15,25 @@ namespace UsageSample.Sender
 
         public async Task RunSample(IServiceProvider provider, IMessageSession bus, string barValue)
         {
-            var conversationId = Xid.NewXid();
-            await bus.Send<TestCommand>("TestDestination", conversationId, cmd =>
-            {
-                cmd.Property1 = "foo";
-                cmd.Property2 = barValue;
-            });
+            var subscriber = provider.GetRequiredService<ISubscriber>();
+            
+            var options = new SendOptions();
+            options.SetDestination("TestDestination");
+            
+            var handle = await bus.Request<TestCommand, TestReply>(
+                subscriber, cmd =>
+                {
+                    cmd.Property1 = "foo";
+                    cmd.Property2 = barValue;
+                }, options);
 
-            var reply = await TestReplyHandler.GetResponseAsync(conversationId);
+            var reply = await handle.GetResponseAsync();
             Console.WriteLine($"Instance {_instanceId} received reply \"{reply.ReplyValue}\"");
         }
 
         private static void AddRedis(IServiceCollection services)
         {
-            var mp = ConnectionMultiplexer.Connect("localhost:6379");
-            services.AddSingleton<IConnectionMultiplexer>(mp);
-            services.AddSingleton(p =>
-            {
-                var subscriber = p.GetRequiredService<IConnectionMultiplexer>().GetSubscriber();
-                return subscriber;
-            });
+            services.AddSingleton(ConnectionMultiplexer.Connect("localhost:6379").GetSubscriber());
         }
 
         private static IMessageSession ConfigureSession(IServiceCollection services)
@@ -50,8 +48,6 @@ namespace UsageSample.Sender
             config.UsePersistence<LearningPersistence>();
             config.UseContainer<ServicesBuilder>(c => c.ExistingServices(services));
             config.UseSerialization<NewtonsoftSerializer>();
-
-            CallbackSubscriber.UseSubscriberFactory(() => services.BuildServiceProvider().GetRequiredService<ISubscriber>());
             
             return Endpoint.Start(config).Result;
         }

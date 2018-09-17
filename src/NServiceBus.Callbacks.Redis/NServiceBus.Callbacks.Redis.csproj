@@ -1,13 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <Configurations>Debug;Release;</Configurations>
+    <Version>0.1.1</Version>
+    <Authors>Jeremy Stafford</Authors>
+    <Company>Provausio</Company>
+    <Product>NServiceBus.Callbacks.Redis</Product>
+    <Description>Unofficial package adding a callbacks implementation for NServiceBus using Redis channels.</Description>
+    <PackageIconUrl>https://pbs.twimg.com/profile_images/522064789091008513/26hVD6OJ_400x400.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/dasjestyr/NServiceBus.Callbacks.Redis</PackageProjectUrl>
+    <Copyright></Copyright>
+    <PackageTags>nservicebus callbacks redis</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/dasjestyr/NServiceBus.Callbacks.Redis</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="NServiceBus" Version="7.1.4" />
-    <PackageReference Include="StackExchange.Redis" Version="2.0.505" />
+    <PackageReference Include="Newtonsoft.Json" Version="[11, 12.0)" />
+    <PackageReference Include="NServiceBus" Version="[7, 8)" />
+    <PackageReference Include="StackExchange.Redis" Version="[2, 3)" />
   </ItemGroup>
 
 </Project>

@@ -10,11 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{5964
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Sender", "samples\UsageSample.Sender\UsageSample.Sender.csproj", "{FF95F012-BD8A-4F8B-8F6D-0F1A3BDA06C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsageSample.Sender", "samples\UsageSample.Sender\UsageSample.Sender.csproj", "{FF95F012-BD8A-4F8B-8F6D-0F1A3BDA06C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Receiver", "samples\UsageSample.Receiver\UsageSample.Receiver.csproj", "{857E6A46-7C5B-4D56-AF15-2919D7F457D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsageSample.Receiver", "samples\UsageSample.Receiver\UsageSample.Receiver.csproj", "{857E6A46-7C5B-4D56-AF15-2919D7F457D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.Messaging", "samples\UsageSample.Messaging\UsageSample.Messaging.csproj", "{1AD09F94-AD08-40FB-A189-EC08A533C9B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsageSample.Messaging", "samples\UsageSample.Messaging\UsageSample.Messaging.csproj", "{1AD09F94-AD08-40FB-A189-EC08A533C9B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.Callbacks.Redis.Tests", "NServiceBus.Callbacks.Redis.Tests\NServiceBus.Callbacks.Redis.Tests.csproj", "{F7E6CA1D-45FD-4156-8144-44E58D4DF548}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{1AD09F94-AD08-40FB-A189-EC08A533C9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD09F94-AD08-40FB-A189-EC08A533C9B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD09F94-AD08-40FB-A189-EC08A533C9B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E6CA1D-45FD-4156-8144-44E58D4DF548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E6CA1D-45FD-4156-8144-44E58D4DF548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E6CA1D-45FD-4156-8144-44E58D4DF548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E6CA1D-45FD-4156-8144-44E58D4DF548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

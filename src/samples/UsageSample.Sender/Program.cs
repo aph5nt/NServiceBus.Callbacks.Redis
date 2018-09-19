@@ -25,7 +25,7 @@ namespace UsageSample.Sender
                 {
                     cmd.Property1 = "foo";
                     cmd.Property2 = barValue;
-                }, options);
+                }, options).WithTimeout(TimeSpan.FromSeconds(60));
 
             Console.WriteLine($"Instance {_instanceId} received reply \"{reply.ReplyValue}\"");
         }

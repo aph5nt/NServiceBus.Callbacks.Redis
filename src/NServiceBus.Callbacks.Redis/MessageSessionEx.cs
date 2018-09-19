@@ -22,7 +22,7 @@ namespace NServiceBus.Callbacks.Redis
         /// <param name="message">The command message.</param>
         /// <param name="options">Options</param>
         /// <returns></returns>
-        public static async Task<ResponseHandle<TReplyType>> Request<TReplyType>(
+        public static async Task<TReplyType> Request<TReplyType>(
             this IMessageSession context,
             ISubscriber subscriber,
             object message,
@@ -39,7 +39,8 @@ namespace NServiceBus.Callbacks.Redis
 
             await context.Send(message, options).ConfigureAwait(false);
 
-            return new ResponseHandle<TReplyType>(subscriber, channelName);
+            var handle = new ResponseHandle<TReplyType>(subscriber, channelName);
+            return await handle.GetResponseAsync();
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace NServiceBus.Callbacks.Redis
         /// <param name="constructor">Action that will be executed against an empty instance of <see cref="{TCommandType}"/></param>
         /// <param name="options">Options</param>
         /// <returns></returns>
-        public static Task<ResponseHandle<TReplyType>> Request<TCommandType, TReplyType>(
+        public static Task<TReplyType> Request<TCommandType, TReplyType>(
             this IMessageSession context, 
             ISubscriber subscriber, 
             Action<TCommandType> constructor, 

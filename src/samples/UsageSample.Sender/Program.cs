@@ -20,14 +20,13 @@ namespace UsageSample.Sender
             var options = new SendOptions();
             options.SetDestination("TestDestination");
             
-            var handle = await bus.Request<TestCommand, TestReply>(
+            var reply = await bus.Request<TestCommand, TestReply>(
                 subscriber, cmd =>
                 {
                     cmd.Property1 = "foo";
                     cmd.Property2 = barValue;
                 }, options);
 
-            var reply = await handle.GetResponseAsync();
             Console.WriteLine($"Instance {_instanceId} received reply \"{reply.ReplyValue}\"");
         }
 

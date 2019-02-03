@@ -11,7 +11,7 @@
     <Product>NServiceBus.Callbacks.Redis</Product>
     <Description>Unofficial package adding a callbacks implementation for NServiceBus using Redis channels.</Description>
     <PackageIconUrl>https://pbs.twimg.com/profile_images/522064789091008513/26hVD6OJ_400x400.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/dasjestyr/NServiceBus.Callbacks.Redis</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jstafford5380/NServiceBus.Callbacks.Redis</PackageProjectUrl>
     <Copyright></Copyright>
     <PackageTags>nservicebus callbacks redis</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>

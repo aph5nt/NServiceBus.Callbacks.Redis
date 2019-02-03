@@ -1,0 +1,23 @@
+version: 2
+jobs:
+    build:
+      docker:
+        - image: microsoft/dotnet:2.2-sdk
+      branches:
+        only:
+            - master
+      steps:
+        - checkout  
+        - run:
+            name: Restore Packages
+            command: dotnet restore src
+        - run:
+            name: Build Solution (should auto-pack)
+            command: dotnet build src -c Release /p:BuildNumber=${CIRCLE_BUILD_NUM}
+        - run:
+            name: Run unit tests
+            command: dotnet test src
+        - run:
+            name: Publish NuGet Packages
+            command: dotnet nuget push src/**/bin/Release/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${PROV_NUGET_KEY}
+        

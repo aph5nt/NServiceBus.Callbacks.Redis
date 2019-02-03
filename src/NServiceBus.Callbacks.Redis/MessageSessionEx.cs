@@ -1,17 +1,17 @@
-﻿using System;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using StackExchange.Redis;
-
-namespace NServiceBus.Callbacks.Redis
+﻿namespace NServiceBus.Callbacks.Redis
 {
+    using System;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using StackExchange.Redis;
+
     public static class MessageSessionEx
     {
-        private const string ReplyTopicHeader = "reply-topic";
-        private const string ReplyTopicFormat = "nsbreply-{0}";
+        internal const string ReplyTopicHeader = "reply-topic"; // since we're modifying how replies work, would it be prudent to just use the reply to address header?
+        internal const string ReplyTopicFormat = "nsbreply-{0}";
 
-        // TODO: see if it's possible to access NSB's IoC container here so we don't
-        // have to require the parameter. Will that create an interface conflict with NServiceBus.Core?
+        // REFACTOR?: see if it's possible to access NSB's IoC container here so we don't
+        // have to require the parameter? Will that create an interface conflict with NServiceBus.Core?
 
         /// <summary>
         /// Sends a request to the endpoint and then returns a handle that can be awaited for response.
@@ -22,24 +22,27 @@ namespace NServiceBus.Callbacks.Redis
         /// <param name="message">The command message.</param>
         /// <param name="options">Options</param>
         /// <returns></returns>
-        public static async Task<ResponseHandle<TReplyType>> Request<TReplyType>(
+        public static async Task<TReplyType> Request<TReplyType>(
             this IMessageSession context,
             ISubscriber subscriber,
             object message,
             SendOptions options) where TReplyType : class, IMessage
         {
             // allows caller to set their own ID
-            if (!options.GetHeaders().ContainsKey(Headers.ConversationId))
+            if (!options.GetHeaders().TryGetValue(Headers.ConversationId, out var conversationId))
+            {
+                conversationId = Guid.NewGuid().ToString();
                 options.SetHeader(Headers.ConversationId, Guid.NewGuid().ToString());
+            }
 
             // set the channel name for consistency   
-            var conversationId = options.GetHeaders()[Headers.ConversationId];
             var channelName = string.Format(ReplyTopicFormat, conversationId);
             options.SetHeader(ReplyTopicHeader, channelName);
 
             await context.Send(message, options).ConfigureAwait(false);
 
-            return new ResponseHandle<TReplyType>(subscriber, channelName);
+            var handle = new ResponseHandle<TReplyType>(subscriber, channelName);
+            return await handle.GetResponseAsync();
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace NServiceBus.Callbacks.Redis
         /// <param name="constructor">Action that will be executed against an empty instance of <see cref="{TCommandType}"/></param>
         /// <param name="options">Options</param>
         /// <returns></returns>
-        public static Task<ResponseHandle<TReplyType>> Request<TCommandType, TReplyType>(
+        public static Task<TReplyType> Request<TCommandType, TReplyType>(
             this IMessageSession context, 
             ISubscriber subscriber, 
             Action<TCommandType> constructor, 

@@ -52,19 +52,33 @@ public class MyCommandHandler : IHandleMessages<MyCommand>
 }
 ```
 
+Note: If you do not provide an instance of `ISubscriber` then the reply logic will work in the default manner. It will simply drop the message in the sender's queue.
+
 ### Sender
 
-Send the request which will give you back a handle. Await it to get your response.
+Await the request, which will now give you back the response object.
 
 ``` csharp
 var options = new SendOptions();
 options.SetDestination("DestinationEndpoint")
-var handle = await session.Request<MyCommand, MyReply>(cmd => {
+var result = await session.Request<MyCommand, MyReply>(cmd => {
     cmd.Prop1 = "foo";
     cmd.Prop2 = "bar";
 }, options);
 
-var result = await handle.GetResponseAsync();
+// result.Value is "Hello World!"
+```
+
+#### Supply a timeout
+If you want to set a timeout, there is an included extension method that can be used
+``` csharp
+var options = new SendOptions();
+options.SetDestination("DestinationEndpoint")
+var result = await session.Request<MyCommand, MyReply>(cmd => {
+    cmd.Prop1 = "foo";
+    cmd.Prop2 = "bar";
+}, options).WithTimeout(TimeSpan.FromSeconds(60); // extension method
+
 // result.Value is "Hello World!"
 ```
 

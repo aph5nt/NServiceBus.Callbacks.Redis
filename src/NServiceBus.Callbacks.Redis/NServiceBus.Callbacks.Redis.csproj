@@ -18,7 +18,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <RepositoryType>Git</RepositoryType>
-    <RepositoryUrl>https://github.com/dasjestyr/NServiceBus.Callbacks.Redis</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jstafford5380/NServiceBus.Callbacks.Redis</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@
     public static class MessageSessionEx
     {
         internal const string ReplyTopicHeader = "reply-topic"; // since we're modifying how replies work, would it be prudent to just use the reply to address header?
-        internal const string ReplyTopicFormat = "nsbreply-{0}";
+        internal const string ReplyTopicFormat = "prov-nsbreply-{0}";
 
         // REFACTOR?: see if it's possible to access NSB's IoC container here so we don't
         // have to require the parameter? Will that create an interface conflict with NServiceBus.Core?

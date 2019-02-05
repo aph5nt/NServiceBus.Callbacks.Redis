@@ -4,21 +4,25 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
-    <Configurations>Debug;Release;</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <Version>0.2.0</Version>
     <Authors>Jeremy Stafford</Authors>
     <Company>Provausio</Company>
-    <Product>NServiceBus.Callbacks.Redis</Product>
-    <Description>Unofficial package adding a callbacks implementation for NServiceBus using Redis channels.</Description>
-    <PackageIconUrl>https://pbs.twimg.com/profile_images/522064789091008513/26hVD6OJ_400x400.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/jstafford5380/NServiceBus.Callbacks.Redis</PackageProjectUrl>
-    <Copyright></Copyright>
-    <PackageTags>nservicebus callbacks redis</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <Product>NServicebus Callback Extension for Redis</Product>
+    <Description>Uses Redis as a backplane for replying to messages. Useful for distributed systems.</Description>
+    <BuildNumber Condition="'$(BuildNumber)' == ''">0</BuildNumber>
+    <VersionSuffix Condition="'$(BuildNumber)' == '0'">-pre</VersionSuffix>
+    <VersionSuffix Condition="'$(VersionSuffix)' == ''"></VersionSuffix>
+    <PackageVersion>$(Version).$(BuildNumber)$(VersionSuffix)</PackageVersion>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageProjectUrl>https://github.com/jstafford5380/provausio.common</PackageProjectUrl>
+    <Copyright>2019 Jeremy Stafford</Copyright>
+    <PackageTags>nservicebus redis</PackageTags>
+    <PackageReleaseNotes>Initial concept release</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
     <RepositoryType>Git</RepositoryType>
-    <RepositoryUrl>https://github.com/jstafford5380/NServiceBus.Callbacks.Redis</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jstafford5380/provausio.common</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
